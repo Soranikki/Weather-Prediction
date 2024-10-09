@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Prediction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <div class="container mx-auto p-8">
+        <h1 class="text-4xl text-center font-bold text-blue-600 mb-6">Weather Prediction</h1>
+
+        <div class="flex justify-center mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow"
+                    type="button" onclick="fillInputs(0, 6.7, -2.2, 1.4)">
+                    Drizzle
+                </button>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow"
+                    type="button" onclick="fillInputs(4.3, 9.4, 5, 3.4)">
+                    Rain
+                </button>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow"
+                    type="button" onclick="fillInputs(4.1, 4.4, 0.6, 5.3)">
+                    Snow
+                </button>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow"
+                    type="button" onclick="fillInputs(0, 8.3, 2.8, 3.9)">
+                    Sun
+                </button>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow"
+                    type="button" onclick="fillInputs(0, 27.8, 13.3, 2.9)">
+                    Fog
+                </button>
+            </div>
+        </div>
+
+        <form method="POST" class="bg-white p-8 rounded shadow-md max-w-lg mx-auto">
+            <div class="mb-4">
+                <label for="precipitation" class="block text-gray-700 font-bold mb-2">Precipitation:</label>
+                <input type="text" id="precipitation" name="precipitation"
+                    class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300"
+                    value="4.3">
+            </div>
+
+            <div class="mb-4">
+                <label for="temp_max" class="block text-gray-700 font-bold mb-2">Max Temperature:</label>
+                <input type="text" id="temp_max" name="temp_max"
+                    class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300"
+                    value="9.4">
+            </div>
+
+            <div class="mb-4">
+                <label for="temp_min" class="block text-gray-700 font-bold mb-2">Min Temperature:</label>
+                <input type="text" id="temp_min" name="temp_min"
+                    class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300"
+                    value="5">
+            </div>
+
+            <div class="mb-4">
+                <label for="wind" class="block text-gray-700 font-bold mb-2">Wind Speed:</label>
+                <input type="text" id="wind" name="wind"
+                    class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300"
+                    value="3.4">
+            </div>
+
+            <div class="flex justify-center">
+                <input type="submit" value="Predict"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow">
+            </div>
+        </form>
+
+        <div class="mt-8">
+            <h2 class="text-2xl text-center font-semibold text-gray-800 mb-4">Neural Network Prediction:</h2>
+            <p class="text-center text-lg text-gray-700">Predicted Weather: <span class="font-bold text-blue-600">{{
+                    nn_output }}</span></p>
+
+            <h2 class="text-2xl text-center font-semibold text-gray-800 mt-6 mb-4">Bagging Model Prediction:</h2>
+            <p class="text-center text-lg text-gray-700">Predicted Weather: <span class="font-bold text-blue-600">{{
+                    bagging_output }}</span></p>
+
+            <h2 class="text-2xl text-center font-semibold text-gray-800 mt-6 mb-4">Stacking Model Prediction:</h2>
+            <p class="text-center text-lg text-gray-700">Predicted Weather: <span class="font-bold text-blue-600">{{
+                    stacking_output }}</span></p>
+        </div>
+    </div>
+
+    <script>
+        function fillInputs(precipitation, temp_max, temp_min, wind) {
+            document.getElementById('precipitation').value = precipitation;
+            document.getElementById('temp_max').value = temp_max;
+            document.getElementById('temp_min').value = temp_min;
+            document.getElementById('wind').value = wind;
+        }
+    </script>
+
+</body>
+
+</html>

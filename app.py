@@ -26,6 +26,14 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
+# Linear Regression Model
+linear_model = LinearRegression()
+linear_model.fit(X_train, y_train)
+
+# Lasso Regression Model
+lasso_model = Lasso(alpha=0.1)
+lasso_model.fit(X_train, y_train)
+
 # Neural Network Model
 model_Neural_Net = keras.Sequential([
     layers.Input(shape=(X_train.shape[1],)),
@@ -51,6 +59,8 @@ weather_mapping = {0: 'drizzle', 1: 'fog', 2: 'rain', 3: 'snow', 4: 'sun'}
 @app.route("/", methods=["GET", "POST"])
 def index():
     nn_output = None
+    linear_output = None
+    lasso_output = None
     bagging_output = None
     stacking_output = None
     
@@ -70,6 +80,14 @@ def index():
         nn_class = np.argmax(nn_pred)
         nn_output = weather_mapping.get(nn_class, 'Unknown')
 
+        linear_pred = linear_model.predict(scaled_input)
+        linear_class = int(round(linear_pred[0]))  # Rounding to nearest integer for classification
+        linear_output = weather_mapping.get(linear_class, 'Unknown')
+
+        lasso_pred = lasso_model.predict(scaled_input)
+        lasso_class = int(round(lasso_pred[0]))  # Rounding to nearest integer for classification
+        lasso_output = weather_mapping.get(lasso_class, 'Unknown')
+
         bagging_pred = bagging_lr.predict(scaled_input)
         bagging_class = int(round(bagging_pred[0]))  # Rounding to nearest integer for classification
         bagging_output = weather_mapping.get(bagging_class, 'Unknown')
@@ -81,6 +99,8 @@ def index():
     return render_template(
         'index.html',
         nn_output=nn_output,
+        linear_output=linear_output,
+        lasso_output=lasso_output,
         bagging_output=bagging_output,
         stacking_output=stacking_output
     )

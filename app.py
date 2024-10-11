@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+from waitress import serve
+
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -106,4 +108,4 @@ def index():
     )
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    serve(app, host="0.0.0.0", port=80, threads=1)

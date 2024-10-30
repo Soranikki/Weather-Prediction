@@ -25,7 +25,7 @@ st.write("""
 - Max Temperature
 - Min Temperature
 - Wind Speed
-### The preset data bellow is for a sunny day
+### The preset below is for a sunny day
 """)
 
 # Input fields
